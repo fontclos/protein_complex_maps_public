@@ -1,10 +1,10 @@
 protein_complex_maps
 ====================
 
-#Scripts for handling protein complex map data
+# Scripts for handling protein complex map data
 
-##Elution correlation
-###Correlation matrices
+## Elution correlation
+### Correlation matrices
 for each experiment, each species, and all experiments concatenated
 
 `python ./protein_complex_maps/external/infer_complexes/score.py`
@@ -22,7 +22,7 @@ for each experiment, each species, and all experiments concatenated
 python ./protein_complex_maps/external/infer_complexes/score.py ./examples/Hs_helaN_ph_hcw120_2_psome_exosc_randos.txt poisson
 ```
 
-###Reformat all by all to tidy (3 column)
+### Reformat all by all to tidy (3 column)
 
 `python ./protein_complex_maps/features/convert_correlation.py`
 
@@ -39,7 +39,7 @@ python ./protein_complex_maps/external/infer_complexes/score.py ./examples/Hs_he
 python ./protein_complex_maps/features/convert_correlation.py --input_correlation_matrix ./examples/Hs_helaN_ph_hcw120_2_psome_exosc_randos.txt.corr_poisson --input_elution_profile ./examples/Hs_helaN_ph_hcw120_2_psome_exosc_randos.txt --output_file ./examples/Hs_helaN_ph_hcw120_2_psome_exosc_randos.txt.corr_poisson_tidy
 ```
 
-###Feature matrix
+### Feature matrix
 
 *Any feature which you can put on a pair of proteins*
 
@@ -66,7 +66,7 @@ python ./protein_complex_maps/features/convert_correlation.py --input_correlatio
 python ./protein_complex_maps/features/build_feature_matrix.py --input_pairs_files ./examples/Hs_helaN_ph_hcw120_2_psome_exosc_randos.txt.corr_poisson_tidy --output_file ./examples/Hs_helaN_ph_hcw120_2_psome_exosc_randos.txt.corr_poisson_tidy.featmat
 ```
 
-###Format corum into test and training sets
+### Format corum into test and training sets
 *Remove redundancy from corum (merge similar clusters)*
 
 `python ./protein_complex_maps/complex_merge.py`
@@ -101,7 +101,7 @@ python ./protein_complex_maps/features/split_complexes.py --input_complexes ./ex
 ```
 
 
-###Make feature matrix w/ labels from corum 
+### Make feature matrix w/ labels from corum 
 
 `python ./protein_complex_maps/features/add_label.py`
 
@@ -153,7 +153,7 @@ python ./protein_complex_maps/features/split_complexes.py --input_complexes ./ex
       corum_train_labeled.libsvm1.scale.txt.out
 
 
-###Train classifier
+### Train classifier
 
 *Takes optimal c and g from SVM training and trains a classifier*
 
@@ -186,7 +186,7 @@ python ./protein_complex_maps/features/split_complexes.py --input_complexes ./ex
       corum_train_labeled.libsvm0.scaleByTrain.resultsWprob_pairs_noself_nodups_wprob.txt
 
 
-###Cluster PPis
+### Cluster PPis
 *At this point, want to find clusters (dense regions)*
 
 *two-stage clustering*
@@ -216,7 +216,7 @@ python ./protein_complex_maps/features/split_complexes.py --input_complexes ./ex
 
 Select best set of clusters (usually a couple thousand) by comparing to corum training complex set using K-Cliques metric or other comparison metric
 
-###Generate Cytoscape Network
+### Generate Cytoscape Network
 
 *Make clusters into pairs*
 
